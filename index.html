@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>NOTCHU</title>
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/ico" href="img/pen.ico" />
+</head>
+
+<body class='snippet-body'>
+    <div id="loading" class="d-none">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Yükleniyor...</span>
+        </div>
+    </div>
+    <div class="container card shadow d-flex justify-content-center mt-5">
+        <!-- nav options -->
+        <ul class="nav nav-pills mb-3 shadow-sm" id="pills-tab" role="tablist">
+            <li class="nav-item"> <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                    role="tab" aria-controls="pills-home" aria-selected="true">Notlarım</a> </li>
+            <li class="nav-item" id="ekleTab"> <a class="nav-link" id="pills-profile-tab" data-toggle="pill"
+                    href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i
+                        class="fas fa-plus"></i></a>
+            </li>
+            <li class="nav-item d-none" id="duzenleTab"> <a class="nav-link" id="pills-duzenle-tab" data-toggle="pill"
+                    href="#pills-duzenle" role="tab" aria-controls="pills-profile" aria-selected="false"><i
+                        class="fas fa-edit"></i></a>
+            </li>
+            <li class="nav-item ml-auto"> <a id="btnCikisYap" class="nav-link" href="#">Çıkış <i
+                        class="fas fa-sign-out-alt"></i></a>
+            </li>
+
+        </ul>
+        <!-- content -->
+        <div class="tab-content" id="pills-tabContent p-3">
+            <!-- 1st card -->
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <!-- <form class="search"> <input class="form-control mr-sm-2" type="search" placeholder="Arama yapın"
+                        aria-label="Search..." id="ara" /></form> -->
+                <ul class="ccontent">
+                    <div class="text-center" id="notYok"></div>
+                </ul>
+            </div>
+
+            <!-- 2nd card -->
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="form addinfo">
+                    <div class="form-group">
+                        <form id="notEkleFrm">
+                            <input class="form-control amount" placeholder="Başlık" required name="Baslik"
+                                id="baslikText" maxlength="50" />
+                            <textarea class="form-control mt-2" id="icerikTextArea" rows="8" placeholder="Not alın..."
+                                required name="Icerik" maxlength="1000"></textarea>
+                            <button type="reset" id="notEkleIptalBtn" class="btn btn-outline-danger mt-2"><i
+                                    class="fas fa-times"></i> Vazgeç</button>
+                            <button class="btn btn-outline-success float-right mt-2" type="submit"><i
+                                    class="fas fa-check"></i>
+                                Ekle</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3rd card -->
+            <div class="tab-pane fade" id="pills-duzenle" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="form addinfo">
+                    <div class="form-group">
+                        <form id="notDuzenleFrm">
+                            <input type="hidden" name="Id" value="" id="notId">
+                            <input class="form-control amount" placeholder="Başlık" required name="Baslik"
+                                id="baslikDuzenleText" maxlength="50" />
+                            <textarea class="form-control mt-2" id="icerikDuzenleTextArea" rows="8"
+                                placeholder="Not alın..." required name="Icerik" maxlength="1000"></textarea>
+                            <p id="tarihP" class="text-right blockquote-footer mt-1">sa</p>
+                            <button type="reset" id="notDuzenleIptalBtn" class="btn btn-outline-danger mt-2"><i
+                                    class="fas fa-times"></i> Vazgeç</button>
+                            <button class="btn btn-outline-success float-right mt-2" type="submit"><i
+                                    class="fas fa-save"></i>
+                                Kaydet</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript'
+        src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
+        integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
+        crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

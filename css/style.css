@@ -1,0 +1,153 @@
+body {
+    background-color: #ffffff
+}
+.card{
+    max-width: 50rem;
+    padding: 0;
+    border: none;
+    border-radius: 0.5rem;
+    margin-bottom:5em;
+}
+
+a.active {
+    border-bottom: 2px solid #007BFF;
+}
+
+.nav-link {
+    color: rgb(110, 110, 110);
+    font-weight: 500
+}
+
+.nav-link:hover {
+    color: #007BFF;
+}
+
+.nav-pills .nav-link.active {
+    color: black;
+    background-color: white;
+    border-radius: 0.5rem 0.5rem 0 0;
+    font-weight: 600
+}
+
+.logo{
+    color: #007BFF;
+    cursor:default;
+}
+
+.tab-content {
+    padding-bottom: 0rem
+}
+
+.form-control {
+    background-color: rgb(241, 243, 247);
+    border: none
+}
+
+/* span {
+    margin-left: 0.5rem;
+    padding: 1px 10px;
+    color: white;
+    background-color: rgb(143, 143, 143);
+    border-radius: 4px;
+    font-weight: 600
+} */
+
+.third {
+    padding: 0 1.5rem 0 1.5rem
+}
+
+label {
+    font-weight: 500;
+    color: rgb(104, 104, 104)
+}
+
+
+.form-control:focus {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 7px rgba(0, 0, 0, 0.2)
+}
+
+
+ul {
+    list-style: none;
+    margin-top: 1rem;
+    padding-inline-start: 0
+}
+
+.search {
+    padding: 0 1rem 0 1rem
+}
+
+.ccontent li .wrapp {
+    padding: 0.3rem 1rem 0.001rem 1rem;
+}
+
+.ccontent li .wrapp div {
+    font-weight: 600
+}
+
+.ccontent li .wrapp p {
+    font-weight: 360
+}
+
+.ccontent li:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+.ccontent li:hover .hide {
+    display: block;
+}
+
+.ccontent i:hover{
+    color:#DC3545
+}
+
+.ccontent li .notBaslik:hover{
+    cursor:pointer;
+    color: #343A40;}
+
+.ccontent li .hide{
+    display: none;
+}
+
+.addinfo {
+    padding: 0 1rem;
+}
+
+.fa-trash{
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+    cursor:pointer;
+}
+
+.fa-sign-out-alt{
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.not-content{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    text-align: center;
+  }
+
+
+.giris{
+    max-width: 17em;
+}
