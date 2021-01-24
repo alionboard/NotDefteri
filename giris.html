@@ -38,8 +38,20 @@
                         <form id="girisForm" action="POST">
                             <input id="girisEposta" class="form-control mt-3 d-block mx-auto giris" type="email"
                                 placeholder="E-Posta" required />
-                            <input id="girisParola" class="form-control mt-3 d-block mx-auto giris" type="password"
-                                placeholder="Parola" required minlength="6" />
+
+                            <div class="input-group mt-3 giris mx-auto">
+                                <input type="password" class="form-control" placeholder="Parola" id="girisParola"
+                                    required minlength="6">
+                                <div class="input-group-append">
+                                    <span class="input-group-text form-control">
+                                        <i class="fas fa-eye goz" id="girisGoz1" onclick="parolayiGoster1()"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- <input id="girisParola" class="form-control mt-3 d-block mx-auto giris" type="password"
+                                placeholder="Parola" required minlength="6" /> -->
+
                             <label class="mt-3">
                                 <input id="benihatirla" type="checkbox" value="benihatirla"> Beni hatırla
                             </label>
@@ -59,10 +71,31 @@
                         <form id="kayitForm" action="POST">
                             <input class="form-control mt-3 d-block mx-auto giris" type="email" placeholder="E-Posta"
                                 required name="Email" id="kayitEposta" />
-                            <input class="form-control mt-3 d-block mx-auto giris" type="password" placeholder="Parola"
-                                required name="Password" id="kayitParola" minlength="6" />
-                            <input class="form-control mt-3 d-block mx-auto giris" type="password"
-                                placeholder="Parola Tekrar" required name="ConfirmPassword" minlength="6" />
+                            <!-- <input class="form-control mt-3 d-block mx-auto giris" type="password" placeholder="Parola"
+                                required name="Password" id="kayitParola" minlength="6" /> -->
+
+                            <div class="input-group mt-3 giris mx-auto">
+                                <input type="password" class="form-control" placeholder="Parola" id="kayitParola"
+                                    required minlength="6" name="Password">
+                                <div class="input-group-append">
+                                    <span class="input-group-text form-control">
+                                        <i class="fas fa-eye goz" id="girisGoz2" onclick="parolayiGoster2()"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- <input class="form-control mt-3 d-block mx-auto giris" type="password" id="kayitParola2"
+                                placeholder="Parola Tekrar" required name="ConfirmPassword" minlength="6" /> -->
+
+                            <div class="input-group mt-3 giris mx-auto">
+                                <input type="password" class="form-control" placeholder="Parola Tekrar"
+                                    id="kayitParola2" required minlength="6" name="ConfirmPassword">
+                                <div class="input-group-append">
+                                    <span class="input-group-text form-control">
+                                        <i class="fas fa-eye goz" id="girisGoz3" onclick="parolayiGoster3()"></i>
+                                    </span>
+                                </div>
+                            </div>
                             <button class="btn btn-primary mx-auto d-block mt-3"><i class="fas fa-check"></i>
                                 Hesabımı
                                 oluştur</button>
@@ -79,6 +112,7 @@
         src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/main.js"></script>
+
 </body>
 
 </html>

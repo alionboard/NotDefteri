@@ -151,3 +151,8 @@ ul {
 .giris{
     max-width: 17em;
 }
+
+.goz{
+    cursor: pointer;
+    color:#007BFF;
+}

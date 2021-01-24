@@ -1,8 +1,8 @@
-// var apiUrl = "https://localhost:44300/";
-var apiUrl = "https://notchuapi.alims.online/";
+var apiUrl = "https://localhost:44300/";
+// var apiUrl = "https://notchuapi.alims.online/";
 var pathname = window.location.pathname;
 
-
+//Depolamada Token Var mı?
 function getAccessToken() {
     var loginDataJson = sessionStorage["login"] || localStorage["login"];
     var loginData;
@@ -23,7 +23,7 @@ function getAuthHeaders() {
     return { Authorization: "Bearer " + getAccessToken() };
 };
 
-// Notları önyüze getirme
+// Notları çekme
 function notlariGetir() {
     $.ajax({
         type: "get",
@@ -114,16 +114,6 @@ $("#girisForm").submit(function (event) {
 
 });
 
-//Not yok yazısı
-function notVarMi() {
-    if ($('.ccontent li').length < 1) {
-        $("#notYok").text("Hiç notunuz yok :(")
-    }
-    else {
-        $("#notYok").text("");
-    };
-};
-
 //Sisteme not ekleme
 $("#notEkleFrm").submit(function (event) {
     event.preventDefault();
@@ -157,12 +147,40 @@ $("#notDuzenleIptalBtn").click(function (event) {
     $("#ekleTab").removeClass("d-none");
 });
 
+//Not düzenle - POST
+// $("#notDuzenleFrm").submit(function (event) {
+//     event.preventDefault();
+//     var notli = $("#notId").val();
+//     var frm = this;
+//     $.ajax({
+//         type: "post",
+//         url: apiUrl + "api/Notlar/Duzenle",
+//         headers: getAuthHeaders(),
+//         data: $(frm).serialize(),
+//         success: function (data) {
+//             $("#" + notli).remove();
+//             notEkle(data);
+//             frm.reset();
+//             $("#pills-home-tab").click();
+//             $("#duzenleTab").addClass("d-none");
+//             $("#ekleTab").removeClass("d-none");
+//             bildirim('success', 'Not Kaydedildi!')
+//         },
+//         error: function (xhr, status, error) {
+//             console.log(xhr.responseJSON);
+//             bildirim('error', 'Not Kaydedilemedi!');
+//         }
+//     });
+// });
+
+
+//Not düzenle - PUT
 $("#notDuzenleFrm").submit(function (event) {
     event.preventDefault();
     var notli = $("#notId").val();
     var frm = this;
     $.ajax({
-        type: "post",
+        type: "PUT",
         url: apiUrl + "api/Notlar/Duzenle",
         headers: getAuthHeaders(),
         data: $(frm).serialize(),
@@ -203,12 +221,34 @@ $("body").on("click", ".notBaslik", function (event) {
     $("#pills-duzenle-tab").click();
 });
 
-//Not Silme
+//Not Silme - GET
+// $("body").on("click", ".silBtn", function (event) {
+//     var id = $(this).closest("li").attr("id");
+//     var li = $(this).closest("li");
+//     $.ajax({
+//         type: "GET",
+//         url: apiUrl + "api/Notlar/Sil/" + id,
+//         headers: getAuthHeaders(),
+//         success: function () {
+//             $(li).remove();
+//             notVarMi();
+//             bildirim('success', 'Silme İşlemi Başarılı!');
+
+//         },
+//         error: function (xhr, error, status) {
+//             bildirim('error', 'Silme İşlemi Başarısız!')
+//             console.log(xhr.responseJSON)
+//         }
+//     });
+
+// });
+
+//Not Silme - DELETE
 $("body").on("click", ".silBtn", function (event) {
     var id = $(this).closest("li").attr("id");
     var li = $(this).closest("li");
     $.ajax({
-        type: "GET",
+        type: "DELETE",
         url: apiUrl + "api/Notlar/Sil/" + id,
         headers: getAuthHeaders(),
         success: function () {
@@ -225,14 +265,26 @@ $("body").on("click", ".silBtn", function (event) {
 
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $("#btnCikisYap").click(function (event) {
     event.preventDefault();
     localStorage.removeItem("login");
     sessionStorage.removeItem("login");
     window.location.href = "giris.html";
 });
-
-
 
 $("#btnKayitForm").click(function () {
     $("#kayitForm").trigger("reset");
@@ -284,6 +336,16 @@ $(document).ajaxStop(function () {
     $("#loading").addClass("d-none");
 });
 
+//Not yok yazısı
+function notVarMi() {
+    if ($('.ccontent li').length < 1) {
+        $("#notYok").text("Hiç notunuz yok :(")
+    }
+    else {
+        $("#notYok").text("");
+    };
+};
+
 //Bildirim
 function bildirim(tip, mesaj) {
     var Toast = Swal.mixin({
@@ -296,21 +358,77 @@ function bildirim(tip, mesaj) {
         icon: tip,
         title: mesaj
     })
-}
+};
 
-$("#ara").on('input', updateValue);
-function updateValue(e) {
-    console.log(e.target.value);
+// $("#ara").on('input', updateValue);
+// function updateValue(e) {
+//     console.log(e.target.value);
+//     var column1RelArray = [];
+//     var list = $(".ccontent li").each(function () {
+//         if ($(this).includes(e.target.value)) {
+//             column1RelArray.push($(this).attr('id'))
+//         };
+//     })
+//     console.log(list);
+// }
+
+//Parolayı göster
+
+// $(".parola-goz").click(function (event) {
+//     event.preventDefault();
+//     var x = $(this).parents("div").eq(1).find(".parolaAlan");
+//     console.log(x);
+//     x.text("sa");
+//     if (x.type === "password") {
+//         x.type = "text";
+//     } else {
+//         x.type = "password";
+//     }
+// });
 
 
-    var column1RelArray = [];
-    var list = $(".ccontent li").each(function () {
-        if ($(this).includes(e.target.value)) {
-            column1RelArray.push($(this).attr('id'))
-        };
-    })
-    console.log(list);
+//Parolayi göster gözleri (JQuery burada sorun yarattığı için ayrı ayrı yazıldı)
+function parolayiGoster1() {
+    var x = document.getElementById("girisParola");
+    var y = document.getElementById("girisGoz1");
+    if (x.type === "password") {
+        x.type = "text";
+        y.classList.add("fa-eye-slash");
+        y.classList.remove("fa-eye");
+    } else {
+        x.type = "password";
+        y.classList.remove("fa-eye-slash");
+        y.classList.add("fa-eye");
+    }
+};
 
-}
+function parolayiGoster2() {
+    var x = document.getElementById("kayitParola");
+    var y = document.getElementById("girisGoz2");
+    if (x.type === "password") {
+        x.type = "text";
+        y.classList.add("fa-eye-slash");
+        y.classList.remove("fa-eye");
+    } else {
+        x.type = "password";
+        y.classList.remove("fa-eye-slash");
+        y.classList.add("fa-eye");
+    }
+};
+
+function parolayiGoster3() {
+    var x = document.getElementById("kayitParola2");
+    var y = document.getElementById("girisGoz3");
+    if (x.type === "password") {
+        x.type = "text";
+        y.classList.add("fa-eye-slash");
+        y.classList.remove("fa-eye");
+    } else {
+        x.type = "password";
+        y.classList.remove("fa-eye-slash");
+        y.classList.add("fa-eye");
+    }
+};
+
 
 girisKontrol();
