@@ -99,17 +99,24 @@ ul {
     .ccontent li:hover .hide {
         display: block;
     }
+    
 
 .ccontent i:hover {
     color: #DC3545
+}
+.ccontent li:hover .edit {
+    display: inline;
+    color: #FFFFFF;
 }
 
 .ccontent li .notBaslik:hover {
     cursor: pointer;
     color: #343A40;
 }
-
-.ccontent li .hide {
+.ccontent li .edit:hover{
+    color: goldenrod;
+}
+.ccontent li .hide, .edit {
     display: none;
 }
 
@@ -169,4 +176,11 @@ ul {
 
 .mt-6{
     margin-top:5rem;
+}
+
+.fa-edit {
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+    margin-left: 0.5rem;
+    
 }

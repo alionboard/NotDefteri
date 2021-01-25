@@ -80,7 +80,7 @@ function notEkle(not) {
     var html = '<li id="' + not.Id + '">' +
         '<span class="d-none" id="tarihSpan-' + not.Id + '">' + moment(not.Tarih).locale('tr').startOf('seconds').fromNow() + '</span>' +
         '<div class="wrapp">' +
-        '<div><a class="notBaslik">' + not.Baslik + '</a><a class="silBtn"><i class="fas fa-trash float-right hide"></i></a></div>' +
+        '<div><a class="notBaslik">' + not.Baslik + '<i class="fas fa-edit edit float-right"></i></a><a class="silBtn"><i class="fas fa-trash float-right hide"></i></a></div>' +
         '<p class="not-content">' + not.Icerik + '</p>' +
         '</div>' +
         '</li>';
