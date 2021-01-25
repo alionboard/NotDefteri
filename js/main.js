@@ -293,7 +293,7 @@ $(document).ajaxStop(function () {
 
 //Not yok yazısı
 function notVarMi() {
-    if ($('.ccontent li').length < 1) {
+    if (notListesi.length < 1) {
         $("#notYok").text("Hiç notunuz yok :(")
         $(".search").addClass("d-none");
     }
