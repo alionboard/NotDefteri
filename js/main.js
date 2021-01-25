@@ -1,5 +1,5 @@
-var apiUrl = "https://localhost:44300/";
-// var apiUrl = "https://notchuapi.alims.online/";
+//var apiUrl = "https://localhost:44300/";
+var apiUrl = "https://notchuapi.alims.online/";
 var pathname = window.location.pathname;
 
 //Depolamada Token Var mı?
@@ -265,20 +265,6 @@ $("body").on("click", ".silBtn", function (event) {
 
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $("#btnCikisYap").click(function (event) {
     event.preventDefault();
     localStorage.removeItem("login");
@@ -372,53 +358,28 @@ function bildirim(tip, mesaj) {
 //     console.log(list);
 // }
 
-//Parolayı göster
-
-// $(".parola-goz").click(function (event) {
-//     event.preventDefault();
-//     var x = $(this).parents("div").eq(1).find(".parolaAlan");
-//     console.log(x);
-//     x.text("sa");
-//     if (x.type === "password") {
-//         x.type = "text";
-//     } else {
-//         x.type = "password";
-//     }
-// });
-
 
 //Parolayi göster gözleri (JQuery burada sorun yarattığı için ayrı ayrı yazıldı)
 function parolayiGoster1() {
     var x = document.getElementById("girisParola");
     var y = document.getElementById("girisGoz1");
-    if (x.type === "password") {
-        x.type = "text";
-        y.classList.add("fa-eye-slash");
-        y.classList.remove("fa-eye");
-    } else {
-        x.type = "password";
-        y.classList.remove("fa-eye-slash");
-        y.classList.add("fa-eye");
-    }
+    iconDegis(x, y);
+
 };
 
 function parolayiGoster2() {
     var x = document.getElementById("kayitParola");
     var y = document.getElementById("girisGoz2");
-    if (x.type === "password") {
-        x.type = "text";
-        y.classList.add("fa-eye-slash");
-        y.classList.remove("fa-eye");
-    } else {
-        x.type = "password";
-        y.classList.remove("fa-eye-slash");
-        y.classList.add("fa-eye");
-    }
+    iconDegis(x, y);
 };
 
 function parolayiGoster3() {
     var x = document.getElementById("kayitParola2");
     var y = document.getElementById("girisGoz3");
+    iconDegis(x, y);
+};
+
+function iconDegis(x, y) {
     if (x.type === "password") {
         x.type = "text";
         y.classList.add("fa-eye-slash");
@@ -429,6 +390,5 @@ function parolayiGoster3() {
         y.classList.add("fa-eye");
     }
 };
-
 
 girisKontrol();

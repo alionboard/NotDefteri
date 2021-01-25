@@ -1,12 +1,14 @@
 body {
-    background-color: #ffffff
+    background-color: #ffffff;
+    margin: 0 2em;
 }
-.card{
+
+.card {
     max-width: 50rem;
     padding: 0;
     border: none;
     border-radius: 0.5rem;
-    margin-bottom:5em;
+    margin-bottom: 5em;
 }
 
 a.active {
@@ -18,9 +20,9 @@ a.active {
     font-weight: 500
 }
 
-.nav-link:hover {
-    color: #007BFF;
-}
+    .nav-link:hover {
+        color: #007BFF;
+    }
 
 .nav-pills .nav-link.active {
     color: black;
@@ -29,9 +31,9 @@ a.active {
     font-weight: 600
 }
 
-.logo{
+.logo {
     color: #007BFF;
-    cursor:default;
+    cursor: default;
 }
 
 .tab-content {
@@ -81,32 +83,33 @@ ul {
     padding: 0.3rem 1rem 0.001rem 1rem;
 }
 
-.ccontent li .wrapp div {
-    font-weight: 600
-}
+    .ccontent li .wrapp div {
+        font-weight: 600
+    }
 
-.ccontent li .wrapp p {
-    font-weight: 360
-}
+    .ccontent li .wrapp p {
+        font-weight: 360
+    }
 
 .ccontent li:hover {
     background-color: #007BFF;
     color: white;
 }
 
-.ccontent li:hover .hide {
-    display: block;
+    .ccontent li:hover .hide {
+        display: block;
+    }
+
+.ccontent i:hover {
+    color: #DC3545
 }
 
-.ccontent i:hover{
-    color:#DC3545
+.ccontent li .notBaslik:hover {
+    cursor: pointer;
+    color: #343A40;
 }
 
-.ccontent li .notBaslik:hover{
-    cursor:pointer;
-    color: #343A40;}
-
-.ccontent li .hide{
+.ccontent li .hide {
     display: none;
 }
 
@@ -114,18 +117,18 @@ ul {
     padding: 0 1rem;
 }
 
-.fa-trash{
+.fa-trash {
     font-size: 0.8rem;
     margin-top: 0.4rem;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.fa-sign-out-alt{
+.fa-sign-out-alt {
     font-size: 1rem;
     margin-top: 0.5rem;
 }
 
-.not-content{
+.not-content {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -145,14 +148,25 @@ ul {
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 9999;
     text-align: center;
-  }
+}
 
 
-.giris{
+.giris {
     max-width: 17em;
 }
 
-.goz{
+.goz {
     cursor: pointer;
-    color:#007BFF;
+    color: #007BFF;
+}
+
+.vertical-center {
+    min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+    display: flex;
+    align-items: center;
+}
+
+.mt-6{
+    margin-top:5rem;
 }
