@@ -23,39 +23,6 @@ function getAuthHeaders() {
     return { Authorization: "Bearer " + getAccessToken() };
 };
 
-// Notları çekme
-function notlariGetir() {
-    $.ajax({
-        type: "get",
-        headers: getAuthHeaders(),
-        url: apiUrl + "api/Notlar/Listele",
-        success: function (data) {
-            notlariListele(data);
-        },
-        error: function (xhr) {
-            console.log(xhr.responseJSON)
-        }
-    })
-};
-
-function notlariListele(notlar) {
-    for (var i = 0; i < notlar.length; i++) {
-        notEkle(notlar[i]);
-    }
-    notVarMi();
-};
-// 
-function notEkle(not) {
-    var html = '<li id="' + not.Id + '">' +
-        '<span class="d-none" id="tarihSpan-' + not.Id + '">' + moment(not.Tarih).locale('tr').startOf('seconds').fromNow() + '</span>' +
-        '<div class="wrapp">' +
-        '<div><a class="notBaslik">' + not.Baslik + '</a><a class="silBtn"><i class="fas fa-trash float-right hide"></i></a></div>' +
-        '<p class="not-content">' + not.Icerik + '</p>' +
-        '</div>' +
-        '</li>';
-    $("#pills-home ul").prepend(html);
-};
-
 function girisKontrol() {
     if (pathname.endsWith("/giris.html")) return;
 
@@ -82,6 +49,85 @@ function girisKontrol() {
     });
 
 };
+
+var notListesi = [];
+var aramaListesi = [];
+// Notları çekme
+function notlariGetir() {
+    $.ajax({
+        type: "get",
+        headers: getAuthHeaders(),
+        url: apiUrl + "api/Notlar/Listele",
+        success: function (data) {
+            notlariListele(data);
+        },
+        error: function (xhr) {
+            console.log(xhr.responseJSON)
+        }
+    })
+};
+
+function notlariListele(notlar) {
+    notListesi = [];
+    for (var i = 0; i < notlar.length; i++) {
+        notEkle(notlar[i]);
+        notListesi.push(notlar[i]);
+    }
+    notVarMi();
+};
+// 
+function notEkle(not) {
+    var html = '<li id="' + not.Id + '">' +
+        '<span class="d-none" id="tarihSpan-' + not.Id + '">' + moment(not.Tarih).locale('tr').startOf('seconds').fromNow() + '</span>' +
+        '<div class="wrapp">' +
+        '<div><a class="notBaslik">' + not.Baslik + '</a><a class="silBtn"><i class="fas fa-trash float-right hide"></i></a></div>' +
+        '<p class="not-content">' + not.Icerik + '</p>' +
+        '</div>' +
+        '</li>';
+    $("#pills-home ul").prepend(html);
+};
+
+// Arama kutucuğunu temizle
+function aramaTemizle() {
+    $("#ara").val("");
+    $(".ccontent").empty();
+    notlariListele(notListesi);
+};
+
+//Sisteme not ekleme
+$("#notEkleFrm").submit(function (event) {
+    event.preventDefault();
+    aramaTemizle();
+    var frm = this;
+    $.ajax({
+        type: "post",
+        url: apiUrl + "api/Notlar/Ekle",
+        headers: getAuthHeaders(),
+        data: $(frm).serialize(),
+        success: function (data) {
+            notEkle(data);
+            notListesi.push(data);
+            $("#pills-home-tab").click();
+            frm.reset();
+            notVarMi();
+            bildirim('success', 'Not Eklendi!');
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseJSON);
+            bildirim('error', 'Not Eklenemedi!');
+        }
+    });
+});
+
+$("#notEkleIptalBtn").click(function (event) {
+    $("#pills-home-tab").click();
+});
+
+$("#notDuzenleIptalBtn").click(function (event) {
+    $("#pills-home-tab").click();
+    $("#duzenleTab").addClass("d-none");
+    $("#ekleTab").removeClass("d-none");
+});
 
 $("#girisForm").submit(function (event) {
     event.preventDefault();
@@ -114,71 +160,12 @@ $("#girisForm").submit(function (event) {
 
 });
 
-//Sisteme not ekleme
-$("#notEkleFrm").submit(function (event) {
-    event.preventDefault();
-    var frm = this;
-    $.ajax({
-        type: "post",
-        url: apiUrl + "api/Notlar/Ekle",
-        headers: getAuthHeaders(),
-        data: $(frm).serialize(),
-        success: function (data) {
-            notEkle(data);
-            $("#pills-home-tab").click();
-            frm.reset();
-            notVarMi();
-            bildirim('success', 'Not Eklendi!');
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr.responseJSON);
-            bildirim('error', 'Not Eklenemedi!');
-        }
-    });
-});
-
-$("#notEkleIptalBtn").click(function (event) {
-    $("#pills-home-tab").click();
-});
-
-$("#notDuzenleIptalBtn").click(function (event) {
-    $("#pills-home-tab").click();
-    $("#duzenleTab").addClass("d-none");
-    $("#ekleTab").removeClass("d-none");
-});
-
-//Not düzenle - POST
-// $("#notDuzenleFrm").submit(function (event) {
-//     event.preventDefault();
-//     var notli = $("#notId").val();
-//     var frm = this;
-//     $.ajax({
-//         type: "post",
-//         url: apiUrl + "api/Notlar/Duzenle",
-//         headers: getAuthHeaders(),
-//         data: $(frm).serialize(),
-//         success: function (data) {
-//             $("#" + notli).remove();
-//             notEkle(data);
-//             frm.reset();
-//             $("#pills-home-tab").click();
-//             $("#duzenleTab").addClass("d-none");
-//             $("#ekleTab").removeClass("d-none");
-//             bildirim('success', 'Not Kaydedildi!')
-//         },
-//         error: function (xhr, status, error) {
-//             console.log(xhr.responseJSON);
-//             bildirim('error', 'Not Kaydedilemedi!');
-//         }
-//     });
-// });
-
-
 //Not düzenle - PUT
 $("#notDuzenleFrm").submit(function (event) {
     event.preventDefault();
     var notli = $("#notId").val();
     var frm = this;
+    aramaTemizle();
     $.ajax({
         type: "PUT",
         url: apiUrl + "api/Notlar/Duzenle",
@@ -186,7 +173,10 @@ $("#notDuzenleFrm").submit(function (event) {
         data: $(frm).serialize(),
         success: function (data) {
             $("#" + notli).remove();
+            var silinecek = notListesi.find(element => element.Id == data.Id);
+            notListesi = notListesi.filter(item => item.Id !== silinecek.Id);
             notEkle(data);
+            notListesi.push(data);
             frm.reset();
             $("#pills-home-tab").click();
             $("#duzenleTab").addClass("d-none");
@@ -221,28 +211,6 @@ $("body").on("click", ".notBaslik", function (event) {
     $("#pills-duzenle-tab").click();
 });
 
-//Not Silme - GET
-// $("body").on("click", ".silBtn", function (event) {
-//     var id = $(this).closest("li").attr("id");
-//     var li = $(this).closest("li");
-//     $.ajax({
-//         type: "GET",
-//         url: apiUrl + "api/Notlar/Sil/" + id,
-//         headers: getAuthHeaders(),
-//         success: function () {
-//             $(li).remove();
-//             notVarMi();
-//             bildirim('success', 'Silme İşlemi Başarılı!');
-
-//         },
-//         error: function (xhr, error, status) {
-//             bildirim('error', 'Silme İşlemi Başarısız!')
-//             console.log(xhr.responseJSON)
-//         }
-//     });
-
-// });
-
 //Not Silme - DELETE
 $("body").on("click", ".silBtn", function (event) {
     var id = $(this).closest("li").attr("id");
@@ -253,9 +221,10 @@ $("body").on("click", ".silBtn", function (event) {
         headers: getAuthHeaders(),
         success: function () {
             $(li).remove();
+            var silinecek = notListesi.find(element => element.Id == id);
+            notListesi = notListesi.filter(item => item.Id !== silinecek.Id);
             notVarMi();
             bildirim('success', 'Silme İşlemi Başarılı!');
-
         },
         error: function (xhr, error, status) {
             bildirim('error', 'Silme İşlemi Başarısız!')
@@ -326,9 +295,11 @@ $(document).ajaxStop(function () {
 function notVarMi() {
     if ($('.ccontent li').length < 1) {
         $("#notYok").text("Hiç notunuz yok :(")
+        $(".search").addClass("d-none");
     }
     else {
         $("#notYok").text("");
+        $(".search").removeClass("d-none");
     };
 };
 
@@ -346,17 +317,21 @@ function bildirim(tip, mesaj) {
     })
 };
 
-// $("#ara").on('input', updateValue);
-// function updateValue(e) {
-//     console.log(e.target.value);
-//     var column1RelArray = [];
-//     var list = $(".ccontent li").each(function () {
-//         if ($(this).includes(e.target.value)) {
-//             column1RelArray.push($(this).attr('id'))
-//         };
-//     })
-//     console.log(list);
-// }
+//Arama Fonksiyonu
+$("#ara").on('input', updateValue);
+function updateValue(e) {
+    aramaListesi = [];
+    $(".ccontent").empty();
+
+    notListesi.forEach(function (item) {
+        if (item.Baslik.toLowerCase().includes(e.target.value.toLowerCase()) || item.Icerik.toLowerCase().includes(e.target.value.toLowerCase())) {
+            aramaListesi.push(item);
+        };
+    });
+    aramaListesi.forEach(element => {
+        notEkle(element);
+    });
+}
 
 
 //Parolayi göster gözleri (JQuery burada sorun yarattığı için ayrı ayrı yazıldı)
